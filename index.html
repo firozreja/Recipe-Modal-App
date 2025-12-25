@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment- 04</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- header start -->
+    <header class="flex justify-center items-center h-16">
+        <img class="w-auto h-12 object-contain" src="./src/images/logo.png" alt="Logo">
+    </header>
+    <!-- header end -->
+
+    <!-- hero section start -->
+    <section id="hero" class="h-64 bg-cover bg-no-repeat flex justify-center items-center"
+        style="background-image:linear-gradient(#000000b8, #000000b8), url('./src/images/page-title.jpg');">
+        <div>
+            <h1 class="text-white text-5xl font-bold text-center mb-3">Search Your <br>Favorite Recipe</h1>
+            <p class="text-white text-center font-normal text-base">A handful of simple ingredients typify the fresh,
+                vibrant <br> flavors of
+                greek cooking</p>
+        </div>
+    </section>
+    <!-- hero section end -->
+
+    <!-- scroll to up btn -->
+    <button id="arrowUpBtn" aria-label="Back to top" class="hidden fixed bottom-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-yellow-500 text-white text-2xl font-bold 
+         rounded-full shadow-lg hover:bg-yellow-600 transition-all duration-300 cursor-pointer">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <!-- scroll to up btn -->
+
+    <!-- search field -->
+    <div class="mt-3 flex justify-center items-center px-3">
+        <input type="text" placeholder="Search..." id="search-value"
+            class="w-full max-w-[600px] h-10 px-3 outline-none border border-gray-300 rounded-l-lg" />
+
+        <button onclick="getFood()" class="h-10 w-12 bg-yellow-400 rounded-r-lg
+           flex items-center justify-center
+           text-white hover:bg-yellow-500 transition coursor-pointer">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </div>
+    <!-- search field end -->
+
+    <!-- Recipes section start -->
+    <div class="max-w-7xl mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold text-center mb-4">Latest Recipes</h2>
+
+        <div id="food-container" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- fetching data -->
+            <!-- <div class="w-full bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://www.themealdb.com/images/media/meals/xd9aj21740432378.jpg" alt="Food Item"
+                        class="w-full h-full object-cover hover:scale-105 transition duration-300" />
+                </div>
+
+                <div class="p-5">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">
+                        Migas
+                    </h2>
+
+                    <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                        Crumple the bread into small pieces. Sprinkle with cold water, cover with
+                        a damp cloth and leave for some time to soften properly.
+                    </p>
+
+                    <button
+                        class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2.5 rounded-lg transition">
+                        View Details
+                    </button>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+    <!-- Recipes section end -->
+
+    <!-- view recipe modal section start -->
+    <div id="recipe-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 md:p-10 opacity-0 pointer-events-none transition-opacity duration-300">
+
+        <div class="bg-white w-full max-w-4xl max-h-[90dvh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+
+            <div class="w-full h-64 md:h-96 p-4">
+                <img src="" class="w-full h-full object-cover rounded-t-lg" id="modal-img" alt="Product Image" />
+            </div>
+
+            <div class="p-6 md:p-8 overflow-y-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4" id="modal-title"></h2>
+
+                <p class="text-gray-600 text-base leading-relaxed mb-6" id="modal-decs">
+                </p>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t pt-6">
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-700 font-semibold">Video Tutorial:</span>
+                        <a href="#" target="_blank"
+                            class="text-red-600 hover:text-red-700 font-bold flex items-center gap-1 transition"
+                            id="youtube-link">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                            Watch on YouTube
+                        </a>
+                    </div>
+
+                    <button id="close-btn"
+                        class="px-6 py-2.5 rounded-xl text-white bg-gray-900 hover:bg-gray-800 font-medium transition-all shadow-lg active:scale-95">
+                        Close Recipe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal section end -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+            <p class="text-sm text-gray-300">
+                Copyright © 2025 Food Recipe App. All rights reserved.
+            </p>
+
+            <div class="flex items-center gap-5">
+                <a href="#" class="hover:text-blue-400 transition">
+                    <i class="fa-brands fa-twitter text-xl"></i>
+                </a>
+
+                <a href="#" class="hover:text-red-500 transition">
+                    <i class="fa-brands fa-youtube text-xl"></i>
+                </a>
+
+                <a href="#" class="hover:text-blue-600 transition">
+                    <i class="fa-brands fa-facebook text-xl"></i>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="./src/js/script.js"></script>
+</body>
+
+</html>
